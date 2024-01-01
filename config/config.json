@@ -9,16 +9,16 @@
   },
   "test": {
     "username": "postgres",
-    "password": "task",
-    "database": "database_test",
+    "password": "root@123",
+    "database": "task",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "port":"5432"
   },
   "production": {
     "username": "postgres",
-    "password": "task",
-    "database": "database_production",
+    "password": "root@123",
+    "database": "task",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "port":"5432"
