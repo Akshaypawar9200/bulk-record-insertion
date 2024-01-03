@@ -1,72 +1,104 @@
-const express = require('express');
+const express = require("express");
 const application = express();
-const fs = require('fs');
-const fastcsv = require('fast-csv');
-const { Client } = require('pg');
-
+const fs = require("fs");
+const csvParser = require("csv-parser");
+const db = require("./models");
+var dot = require('dot-object');
 application.use(express.json());
 
-const client = new Client({
-  user: 'postgres',
-  host: '127.0.0.1',
-  database: 'task',
-  password: 'root@123',
-  port: 5432,
+application.post("/", async (req, res) => {
+  const filePath = "sample.csv";
+  const body = req.body;
+  const csvReadStream = fs.createReadStream(filePath);
+  csvReadStream.pipe(csvParser())
+  .on("data", async (Data) => {
+    try {
+      // Check the column headers and insert into the appropriate tables
+    const allData = {};
+
+    // Loop through each key in body
+    for (const key in body) {
+      // Check if the key belongs to the object itself (not inherited from prototype)
+      if (body.hasOwnProperty(key)) {
+        // Get the value associated with the current key in body
+        const valueFrombody = body[key];
+
+        // Look up the corresponding value in Data using the value from body
+        const correspondingValueInrow = Data[valueFrombody];
+
+        // Assign the key from body and its corresponding value from Data to the new object
+        allData[key] = correspondingValueInrow;
+      }
+    }    
+    dot.object(allData);
+  
+    let { account, location, contact } = allData;
+ 
+    const accountId = await accountTable(account);
+    await db.account.build(account).validate();
+
+    let locationId = await locationTable(Data,location, accountId);
+
+    await contactTable(accountId,locationId,contact);
+
+    } catch (error) {
+      console.log("error occures",error)
+    }
+  })
+  .on("end", () => {
+    res.send("Data Successfully inserted.");
+  });
 });
 
-client.connect();
-
-application.post('/', async (req, res) => {
-  const filePath = 'sample.csv';
-
+async function accountTable(account){
   try {
-    await client.query('BEGIN');
-
-    const stream = fs.createReadStream(filePath);
-    const csvStream = fastcsv
-      .parse({ headers: true })
-      .on('data', async (data) => {
-        const { company_name, website, emp_size, emp_range, revenu, revenue_range, address, city, state, country, phone_no, dummy_col } = data;
-
-        try {
-          // Insert data into the accounts table and retrieve the account_id
-          const accountResult = await client.query(
-            'INSERT INTO accounts (company_name, website, emp_size, emp_range, revenu, revenue_range) VALUES($1,$2,$3,$4,$5,$6) RETURNING id',
-            [company_name, website, emp_size, emp_range, revenu, revenue_range]
-          );
-
-          if (accountResult.rows && accountResult.rows.length > 0) {
-            const accountId = accountResult.rows[0].id;
-
-            // Convert the dummy_col array string to an actual array
-            const dummyArray = JSON.parse(dummy_col); // Assuming the dummy_col is a JSON string representing an array
-
-            // Insert data into the locations table with the foreign key account_id
-            await client.query(
-              'INSERT INTO locations (account_id, address, city, state, country, phone_no, dummy_col) VALUES($1, $2, $3, $4, $5, $6, $7)',
-              [accountId, address, city, state, country, phone_no, dummyArray]
-            );
-          } else {
-            throw new Error('Failed to retrieve account ID');
-          }
-        } catch (error) {
-          await client.query('ROLLBACK');
-          console.error('Error:', error);
-          res.status(500).send('Error inserting data');
-        }
-      })
-      .on('end', async () => {
-        await client.query('COMMIT');
-        res.status(200).send('Data inserted successfully');
-      });
-
-    stream.pipe(csvStream);
-  } catch (err) {
-    await client.query('ROLLBACK');
-    res.status(500).send('Error inserting data');
+    await db.account.build(account).validate();
+    const result = await db.account.create(account);
+    return result.dataValues.id;
+  } catch (error) {
+    console.error("Error inserting data into Account Table:", error);
+    return null;
   }
-});
+}
 
+async function locationTable(Data,location,accountId){
+  try {
+
+    let locationKeys=Object.keys(location)
+    const locationData={}
+
+   
+    for (let i = 0; i < locationKeys.length; i++) {
+
+      try {
+        locationData[locationKeys[i]] = JSON.parse(Data[locationKeys[i]]);
+      } catch (error) {
+        locationData[locationKeys[i]] = Data[locationKeys[i]];
+      }
+    }
+    locationData.accountId = accountId;
+    await db.location.build(locationData).validate();
+    const result = await db.location.create(locationData);
+    return result.dataValues.id;
+
+  } catch (error) {
+    console.error("Error inserting data into location Table:", error);
+    return null;
+  }
+}
+
+async function contactTable(accountId,locationId,contact){
+try {
+  contact.accountId=accountId
+  contact.locationId=locationId
+  await db.contact.build(contact).validate()
+  const result=await db.contact.create(contact)
+  return result
+} catch (error) {
+  console.error("Error inserting data into location Table:", error);
+  return null;
+}
+}
 application.listen(9000, () => {
-  console.log('Server running on port 9000');
+  console.log("Server running on port 9000");
 });

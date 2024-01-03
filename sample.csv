@@ -1,11 +1,11 @@
-﻿company_name,website,emp_size,emp_range,revenu,revenue_range,,address,city,state,country,phone_no,dummy_col
-akshay,www.nexsales.com,55,51-200,54484,$1M - $10M,,abc,pune,maharashtra,india,52345,"[1,2,3]"
-akshay,www.nexsales.com,55,51-200,54484,$1M - $10M,,asds,pune,maharashtra,india,52345,"[1,2,3]"
-akshay,www.nexsales.com,55,51-200,54484,$1M - $10M,,dsad,pune,maharashtra,india,52345,"[1,2,3]"
-akshay,www.nexsales.com,55,51-200,54484,$1M - $10M,,sadd,pune,maharashtra,india,52345,"[1,2,3]"
-akshay,www.nexsales.com,55,51-200,54484,$1M - $10M,,dsadsa,pune,maharashtra,india,52345,"[1,2,3]"
-akshay,www.nexsales.com,55,51-200,54484,$1M - $10M,,dsadsa,mumbai,maharashtra,india,52345,"[1,2,3]"
-akshay,www.nexsales.com,55,51-200,54484,$1M - $10M,,dads,mumbai,maharashtra,india,52345,"[1,2,3]"
-akshay,www.nexsales.com,55,51-200,54484,$1M - $10M,,dasdsa,mumbai,maharashtra,india,52345,"[1,2,3]"
-akshay,www.nexsales.com,55,51-200,54484,$1M - $10M,,sdasd,mumbai,maharashtra,india,52345,"[1,2,3]"
-akshay,www.nexsales.com,55,51-200,54484,$1M - $10M,,dasdsa,mumbai,maharashtra,india,52345,"[1,2,3]"
+companyname,website,emp_size,emp_range,revenu,revenue_range,,address,city,state,country,phoneno,dummycol,name,department,salary,mobile
+nexsales,www.nexsales.com,55,51-200,54484,$1M - $10M,,abc,pune,maharashtra,india,52345,"[1,2,3]",abc,dev,4562455,7856425
+swabhav,www.swabhav.com,55,51-200,54484,$1M - $10M,,asds,pune,maharashtra,india,52345,"[1,2,3]",def,dev,4545454,7856426
+techmahindra,www.techmahindra.com,55,51-200,54484,$1M - $10M,,dsad,pune,maharashtra,india,52345,"[1,2,3]",ghi,test,4554581,7856427
+microsoft,www.microsoft.com,55,51-200,54484,$1M - $10M,,sadd,pune,maharashtra,india,52345,"[1,2,3]",jkl,test,7856454,7856428
+tcs,www.tcs.com,55,51-200,54484,$1M - $10M,,dsadsa,pune,maharashtra,india,52345,"[1,2,3]",mno,dev,4566788,7856429
+capgemini,www.capgemini.com,55,51-200,54484,$1M - $10M,,dsadsa,mumbai,maharashtra,india,52345,"[1,2,3]",pqr,lead,1224554,7856430
+wipro,www.wipro.com,55,51-200,54484,$1M - $10M,,dads,mumbai,maharashtra,india,52345,"[1,2,3]",stu,lead,5445458,7856431
+hcl,www.hcl.com,55,51-200,54484,$1M - $10M,,dasdsa,mumbai,maharashtra,india,52345,"[1,2,3]",vwx,mgr,4545875,7856432
+infosys,www.infosys.com,55,51-200,54484,$1M - $10M,,sdasd,mumbai,maharashtra,india,52345,"[1,2,3]",yza,mgr,7895464,7856433
+google,www.google.com,55,51-200,54484,$1M - $10M,,dasdsa,mumbai,maharashtra,india,52345,"[1,2,3]",lmn,ceo,7894554,7856433

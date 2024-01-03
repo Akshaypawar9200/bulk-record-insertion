@@ -10,13 +10,25 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   location.init({
+    companyname: {
+      type: DataTypes.STRING,
+      allowNull:false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Company name cannot be empty.",
+        },
+        isAlpha: {
+          args: true,
+          msg: "Company name must contain only alphabetic characters.",
+        },
+      },
+    },
     address: {
       type: DataTypes.STRING,
+      allowNull:false,
       validate: {
-        allowNull: {
-          args: false,
-          msg: 'Address cannot be null.',
-        },
+        
         isAlpha: {
           args: true,
           msg: 'Address must contain only alphabetic characters.',
@@ -29,11 +41,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     city: {
       type: DataTypes.STRING,
+      allowNull:false,
       validate: {
-        allowNull: {
-          args: false,
-          msg: 'City cannot be null.',
-        },
+      
         isAlpha: {
           args: true,
           msg: 'City must contain only alphabetic characters.',
@@ -46,11 +56,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     state: {
       type: DataTypes.STRING,
+      allowNull:false,
       validate: {
-        allowNull: {
-          args: false,
-          msg: 'State cannot be null.',
-        },
+        
         isAlpha: {
           args: true,
           msg: 'State must contain only alphabetic characters.',
@@ -63,11 +71,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     country: {
       type: DataTypes.STRING,
+      allowNull:false,
       validate: {
-        allowNull: {
-          args: false,
-          msg: 'Country cannot be null.',
-        },
+      
         isAlpha: {
           args: true,
           msg: 'Country must contain only alphabetic characters.',
@@ -78,31 +84,26 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
-    phoneNo: {
+    phoneno: {
       type: DataTypes.INTEGER,
+      allowNull:false,
       validate: {
-        allowNull: {
-          args: false,
-          msg: 'Phone number cannot be null.',
-        },
+      
         isInt: {
           args: true,
           msg: 'Phone number must be an integer.',
         },
       },
     },
-    dummyCol: {
+    dummycol: {
       type: DataTypes.ARRAY({
         type: DataTypes.INTEGER,
         validate: {
           isInt: {
             args: true,
             msg: 'Dummy column must contain only integers.',
-          },
-          allowNull: {
-            args: false,
-            msg: 'Dummy column cannot be null.',
-          },
+          }
+          
         },
       }),
     },

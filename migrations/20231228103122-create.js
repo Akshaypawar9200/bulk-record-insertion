@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      company_name: {
+      companyname: {
         type: Sequelize.STRING
       },
       website: {
@@ -26,15 +26,15 @@ module.exports = {
       },
       revenue_range: {
         type: Sequelize.STRING
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE
       }
-      // created_at: {
-      //   allowNull: false,
-      //   type: Sequelize.DATE
-      // },
-      // updated_at: {
-      //   allowNull: false,
-      //   type: Sequelize.DATE
-      // }
     });
   },
   async down(queryInterface, Sequelize) {

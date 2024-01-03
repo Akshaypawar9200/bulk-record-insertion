@@ -9,6 +9,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      companyname: {
+        type: Sequelize.STRING
+      },
       address: {
         type: Sequelize.STRING
       },
@@ -21,10 +24,10 @@ module.exports = {
       country: {
         type: Sequelize.STRING
       },
-      phone_no: {
+      phoneno: {
         type: Sequelize.INTEGER
       },
-      dummy_col: {
+      dummycol: {
         type: Sequelize.ARRAY(Sequelize.INTEGER)
       },
    
@@ -39,15 +42,15 @@ module.exports = {
         },
         key:'id'
       },
-    }
-      // created_at: {
-      //   allowNull: false,
-      //   type: Sequelize.DATE
-      // },
-      // updated_at: {
-      //   allowNull: false,
-      //   type: Sequelize.DATE
-      // }
+    },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
       
     });
   },

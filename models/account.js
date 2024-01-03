@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   
   account.init(
     {
-      companyName: {
+      companyname: {
         type: DataTypes.STRING,
         allowNull:false,
         validate: {
@@ -57,21 +57,21 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull:false,
         validate: {
-          isIn: {
-            args: [
-              [
-                "0 - 10",
-                "11 - 50",
-                "51 - 200",
-                "201 - 500",
-                "501 - 1,000",
-                "1,001 - 5,000",
-                "5,001 - 10,000",
-                "10,000+",
-              ],
-            ],
-            msg: "Invalid employee range.",
-          },
+          // isIn: {
+          //   args: [
+          //     [
+          //       "0 - 10",
+          //       "11 - 50",
+          //       "51 - 200",
+          //       "201 - 500",
+          //       "501 - 1,000",
+          //       "1,001 - 5,000",
+          //       "5,001 - 10,000",
+          //       "10,000+",
+          //     ],
+          //   ],
+          //   msg: "Invalid employee range.",
+          // },
           notNull: {
             args: true,
             msg: "Employee range cannot be null.",
@@ -96,22 +96,22 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull:false,
         validate: {
-          isIn: {
-            args: [
-              [
-                "0 - $1M",
-                "$1M - $10M",
-                "$10M - $50M",
-                "$50M - $100M",
-                "$100M - $250M",
-                "$250M - $500M",
-                "$500M - $1B",
-                "$1B - $10B",
-                "$10B+",
-              ],
-            ],
-            msg: "Invalid revenue range.",
-          },
+          // isIn: {
+          //   args: [
+          //     [
+          //       "0 - $1M",
+          //       "$1M - $10M",
+          //       "$10M - $50M",
+          //       "$50M - $100M",
+          //       "$100M - $250M",
+          //       "$250M - $500M",
+          //       "$500M - $1B",
+          //       "$1B - $10B",
+          //       "$10B+",
+          //     ],
+          //   ],
+          //   msg: "Invalid revenue range.",
+          // },
           notNull: {
             args: true,
             msg: "Revenue range cannot be null.",

@@ -11,11 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: {
         type: DataTypes.STRING,
+        allowNull:false,
         validate: {
-          allowNull: {
-            args: false,
-            msg: "Name cannot be null.",
-          },
+         
           isAlpha: {
             args: true,
             msg: "Name must contain only alphabetic characters.",
@@ -28,11 +26,9 @@ module.exports = (sequelize, DataTypes) => {
       },
       department: {
         type: DataTypes.STRING,
+        allowNull:false,
         validate: {
-          allowNull: {
-            args: false,
-            msg: "Department cannot be null.",
-          },
+        
           isAlpha: {
             args: true,
             msg: "Department must contain only alphabetic characters.",
@@ -45,28 +41,24 @@ module.exports = (sequelize, DataTypes) => {
       },
       salary: {
         type: DataTypes.INTEGER,
+        allowNull:false,
         validate: {
           isInt: {
             args: true,
             msg: "Salary must be an integer.",
           },
-          allowNull: {
-            args: false,
-            msg: "Salary cannot be null.",
-          },
+        
         },
       },
       mobile: {
         type: DataTypes.INTEGER,
+        allowNull:false,
         validate: {
           isInt: {
             args: true,
             msg: "Mobile number must be an integer.",
           },
-          allowNull: {
-            args: false,
-            msg: "Mobile number cannot be null.",
-          },
+        
         },
       },
     },
